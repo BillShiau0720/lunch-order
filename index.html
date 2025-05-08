@@ -56,9 +56,8 @@
       <h4 class="text-center">今日午餐店家</h4>
       <p class="mb-1">召集人：<span id="hostName">阿瑋</span></p>
       <p class="mb-1">訂購人：<span id="ordererName">你</span></p>
-      <p class="mb-1">餐廳：<span id="storeName">胖老爹</span></p>
-      <p class="mb-1">備註：<span id="remarkText">無</span></p>
-       <p class="mb-3 text-muted" id="storeNote">（請依門市實際菜單為主）</p>
+      <p class="mb-3">餐廳：<span id="storeName">胖老爹</span></p>
+<p class="mb-3 text-muted" id="storeNote">（請依門市實際菜單為主）</p>
       <img id="menuImage" class="menu-img-thumb shadow-sm mb-3" alt="今日菜單" onclick="enlargeMenu()" />
 
       <div class="mb-3">
@@ -131,27 +130,6 @@
   let selectedPayment = "";
   const cart = [];
 
-  window.onload = () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const host = urlParams.get("host");
-    const orderer = urlParams.get("orderer");
-    const store = urlParams.get("store");
-    const remark = urlParams.get("remark");
-    if (host) document.getElementById("hostName").textContent = host;
-    if (orderer) document.getElementById("ordererName").textContent = orderer;
-    if (store) document.getElementById("storeName").textContent = store;
-    if (remark) document.getElementById("remarkText").textContent = remark;
-    const menu = urlParams.get("menu");
-    if (menu) {
-  const decodedMenu = decodeURIComponent(menu);
-  const url = decodedMenu.startsWith("http")
-    ? decodedMenu
-    : `https://drive.google.com/uc?export=view&id=${decodedMenu}`;
-  document.getElementById("menuImage").src = url;
-  document.getElementById("menuImageModal").src = url;
-}
-  };
-  
   function addToCart() {
     const name = document.getElementById("foodName").value.trim();
     const price = parseInt(document.getElementById("price").value);
@@ -253,5 +231,29 @@
   }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  window.onload = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const menu = urlParams.get("menu");
+if (menu) {
+  const decodedMenu = decodeURIComponent(menu);
+  const url = decodedMenu.startsWith("http")
+    ? decodedMenu
+    : `https://drive.google.com/uc?export=view&id=${decodedMenu}`;
+  document.getElementById("menuImage").src = url;
+  document.getElementById("menuImageModal").src = url;
+}
+      document.getElementById("menuImageModal").src = url;
+    }
+    const urlParams = new URLSearchParams(window.location.search);
+    const host = urlParams.get("host");
+    const orderer = urlParams.get("orderer");
+    const store = urlParams.get("store");
+
+    if (host) document.getElementById("hostName").textContent = host;
+    if (orderer) document.getElementById("ordererName").textContent = orderer;
+    if (store) document.getElementById("storeName").textContent = store;
+  };
+</script>
 </body>
 </html>
