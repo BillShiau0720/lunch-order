@@ -145,12 +145,13 @@
     const urlParams = new URLSearchParams(window.location.search);
     const menu = urlParams.get("menu");
     if (menu) {
-      const url = menu.startsWith("http")
-        ? menu
-        : `https://drive.google.com/uc?export=view&id=${menu}`;
-      document.getElementById("menuImage").src = url;
-      document.getElementById("menuImageModal").src = url;
-    }
+  const decodedMenu = decodeURIComponent(menu);
+  const url = decodedMenu.startsWith("http")
+    ? decodedMenu
+    : `https://drive.google.com/uc?export=view&id=${decodedMenu}`;
+  document.getElementById("menuImage").src = url;
+  document.getElementById("menuImageModal").src = url;
+}
   };
   
   function addToCart() {
