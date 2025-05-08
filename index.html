@@ -141,8 +141,6 @@
     if (orderer) document.getElementById("ordererName").textContent = orderer;
     if (store) document.getElementById("storeName").textContent = store;
     if (remark) document.getElementById("remarkText").textContent = remark;
-
-    const urlParams = new URLSearchParams(window.location.search);
     const menu = urlParams.get("menu");
     if (menu) {
   const decodedMenu = decodeURIComponent(menu);
