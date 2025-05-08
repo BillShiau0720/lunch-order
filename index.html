@@ -235,25 +235,26 @@
   window.onload = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const menu = urlParams.get("menu");
-if (menu) {
-  const decodedMenu = decodeURIComponent(menu);
-  const url = decodedMenu.startsWith("http")
-    ? decodedMenu
-    : `https://drive.google.com/uc?export=view&id=${decodedMenu}`;
-  document.getElementById("menuImage").src = url;
-  document.getElementById("menuImageModal").src = url;
-}
-      document.getElementById("menuImageModal").src = url;
-    }
-    const urlParams = new URLSearchParams(window.location.search);
     const host = urlParams.get("host");
     const orderer = urlParams.get("orderer");
     const store = urlParams.get("store");
+    const remark = urlParams.get("remark");
 
     if (host) document.getElementById("hostName").textContent = host;
     if (orderer) document.getElementById("ordererName").textContent = orderer;
     if (store) document.getElementById("storeName").textContent = store;
+    if (remark) document.getElementById("remarkText").textContent = remark;
+
+    if (menu) {
+      const decodedMenu = decodeURIComponent(menu);
+      const url = decodedMenu.startsWith("http")
+        ? decodedMenu
+        : `https://drive.google.com/uc?export=view&id=${decodedMenu}`;
+      document.getElementById("menuImage").src = url;
+      document.getElementById("menuImageModal").src = url;
+    }
   };
 </script>
+
 </body>
 </html>
