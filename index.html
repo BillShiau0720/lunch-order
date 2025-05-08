@@ -121,7 +121,7 @@
   <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
     <div class="modal-content">
       <div class="modal-body p-0">
-        <img src="https://drive.google.com/uc?export=view&id=1_-J68K1wzq0nJMdq8ZtygcJ1JI37KNzq" class="w-100" alt="放大菜單" />
+        <img id="menuImageModal" class="w-100" alt="放大菜單" />
       </div>
     </div>
   </div>
@@ -145,9 +145,12 @@
     const urlParams = new URLSearchParams(window.location.search);
     const menu = urlParams.get("menu");
     if (menu) {
-      document.getElementById("menuImage").src = menu.startsWith("http")
+      const url = menu.startsWith("http")
         ? menu
         : `https://drive.google.com/uc?export=view&id=${menu}`;
+      document.getElementById("menuImage").src = url;
+      document.getElementById("menuImageModal").src = url;
+    }
   };
   
   function addToCart() {
