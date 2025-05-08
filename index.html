@@ -59,7 +59,7 @@
       <p class="mb-1">餐廳：<span id="storeName">胖老爹</span></p>
       <p class="mb-1">備註：<span id="remarkText">無</span></p>
        <p class="mb-3 text-muted" id="storeNote">（請依門市實際菜單為主）</p>
-      <img src="https://drive.google.com/uc?export=view&id=1_-J68K1wzq0nJMdq8ZtygcJ1JI37KNzq" id="menuImage" class="menu-img-thumb shadow-sm mb-3" alt="今日菜單" onclick="enlargeMenu()" />
+      <img id="menuImage" class="menu-img-thumb shadow-sm mb-3" alt="今日菜單" onclick="enlargeMenu()" />
 
       <div class="mb-3">
         <label class="form-label">餐點名稱</label>
@@ -141,6 +141,13 @@
     if (orderer) document.getElementById("ordererName").textContent = orderer;
     if (store) document.getElementById("storeName").textContent = store;
     if (remark) document.getElementById("remarkText").textContent = remark;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const menu = urlParams.get("menu");
+    if (menu) {
+      document.getElementById("menuImage").src = menu.startsWith("http")
+        ? menu
+        : `https://drive.google.com/uc?export=view&id=${menu}`;
   };
   
   function addToCart() {
