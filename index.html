@@ -238,7 +238,6 @@
   resultText += `付款方式：${selectedPayment === "cash" ? "現金" : "Line Pay"}`;
   alert("📝 訂單資訊如下：\n" + resultText);
 
-  // 📨 寫入 Google Sheet
   fetch("https://script.google.com/macros/s/AKfycbx0EVdCIAefMYelhPGx99GvvCJkLN85lKbGhWqx_4-KHrEpBkHKK8cQ7-FS0-s4dKa7/exec", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -247,6 +246,17 @@
       cart,
       payment: selectedPayment === "cash" ? "現金" : "Line Pay"
     })
+  })
+  .then(res => res.text())
+  .then(msg => {
+    alert("✅ 訂單送出成功！\n" + msg);
+    document.getElementById("step2").style.display = "none";
+    document.getElementById("step1").style.display = "block";
+    cart.length = 0;
+    renderCart();
+  })
+  .catch(err => {
+    alert("❌ 訂單送出失敗：" + err);
   });
 }
 
