@@ -231,7 +231,7 @@
 
   cart.forEach(item => {
     const subtotal = item.price * item.qty;
-    resultText += `${user}-${today}-${item.name} x ${item.qty}-${item.note || "無"}-${subtotal}\n`;
+    resultText += `${today}-${user}-餐點:${item.name} x ${item.qty}-備註:${item.note || "無"}-總金額:${subtotal}\n`;
     total += subtotal;
   });
 
