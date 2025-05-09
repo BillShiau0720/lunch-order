@@ -218,12 +218,28 @@
   }
 
   function submitOrder() {
-    if (!selectedPayment) {
-      alert("請選擇付款方式！");
-      return;
-    }
-    alert("✅ 訂餐成功！付款方式：" + (selectedPayment === "cash" ? "現金" : "Line Pay"));
+  if (!selectedPayment) {
+    alert("請選擇付款方式！");
+    return;
   }
+
+  const user = document.getElementById("userSelect").value;
+  const today = new Date().toISOString().split("T")[0];
+
+  let resultText = "";
+  let total = 0;
+
+  cart.forEach(item => {
+    const subtotal = item.price * item.qty;
+    resultText += `${user}-${today}-${item.name} x ${item.qty}-${item.note || "無"}-${subtotal}\n`;
+    total += subtotal;
+  });
+
+  resultText += `付款方式：${selectedPayment === "cash" ? "現金" : "Line Pay"}`;
+
+  alert("📝 訂單資訊如下：\n" + resultText);
+}
+
 
   function enlargeMenu() {
     const menuModal = new bootstrap.Modal(document.getElementById('menuModal'));
