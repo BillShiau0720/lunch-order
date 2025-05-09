@@ -217,7 +217,7 @@
     document.getElementById("pay-" + type).classList.add("active");
   }
 
-  function submitOrder() {
+ function submitOrder() {
   if (!selectedPayment) {
     alert("請選擇付款方式！");
     return;
@@ -231,13 +231,23 @@
 
   cart.forEach(item => {
     const subtotal = item.price * item.qty;
-    resultText += `${today}-${user}-餐點:${item.name} x ${item.qty}-備註:${item.note || "無"}-總金額:${subtotal}\n`;
+    resultText += `${user}-${today}-${item.name} x${item.qty}-${item.note || "無"}-${subtotal}\n`;
     total += subtotal;
   });
 
   resultText += `付款方式：${selectedPayment === "cash" ? "現金" : "Line Pay"}`;
-
   alert("📝 訂單資訊如下：\n" + resultText);
+
+  // 📨 寫入 Google Sheet
+  fetch("https://script.google.com/macros/s/AKfycbx0EVdCIAefMYelhPGx99GvvCJkLN85lKbGhWqx_4-KHrEpBkHKK8cQ7-FS0-s4dKa7/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user,
+      cart,
+      payment: selectedPayment === "cash" ? "現金" : "Line Pay"
+    })
+  });
 }
 
 
